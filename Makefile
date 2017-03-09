@@ -6,7 +6,7 @@
 #    By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/25 18:53:08 by mmartins          #+#    #+#              #
-#    Updated: 2017/02/24 14:30:32 by mmartins         ###   ########.fr        #
+#    Updated: 2017/03/09 12:21:38 by mmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,12 @@ NAME =		fdf
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror -I. -fsanitize=address
 
-SRCS =		fdf.c \
+SRCS =		main.c \
 			get_next_line.c \
 			display.c \
+			draw.c \
+			keyhook.c \
+			new_points.c \
 			color.c \
 
 OBJS =		$(SRCS:.c=.o)

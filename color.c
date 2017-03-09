@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/24 14:17:13 by mmartins          #+#    #+#             */
-/*   Updated: 2017/02/24 14:17:32 by mmartins         ###   ########.fr       */
+/*   Created: 2017/03/09 12:18:55 by mmartins          #+#    #+#             */
+/*   Updated: 2017/03/09 12:19:27 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static unsigned int	ft_get_color_suite(int cp1, int cp2, int i, int delta)
 	return (color);
 }
 
-unsigned int	ft_get_color(int cp1, int cp2, int i, int delta)
+unsigned int		ft_get_color(int cp1, int cp2, int i, int delta)
 {
 	unsigned int	color;
 	unsigned char	r;

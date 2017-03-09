@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 18:23:42 by mmartins          #+#    #+#             */
-/*   Updated: 2017/02/24 15:01:54 by mmartins         ###   ########.fr       */
+/*   Created: 2017/03/09 11:55:52 by mmartins          #+#    #+#             */
+/*   Updated: 2017/03/09 13:44:08 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int			ft_realloc(int fd, t_point **tab_p)
 	return (j);
 }
 
-t_point		*readline(char *line, t_point **tab_p, t_env *e)
+t_point				*readline(char *line, t_point **tab_p, t_env *e)
 {
 	int			i;
 	char		**linesplit;
@@ -89,18 +89,16 @@ t_point		*readline(char *line, t_point **tab_p, t_env *e)
 	return (*tab_p);
 }
 
-int			main(int ac, char **av)
+int					main(int ac, char **av)
 {
 	int			fd;
 	char		*line;
 	t_point		*tab_p;
 	size_t		j;
-	size_t		i;
 	t_env		e;
 
 	j = 0;
 	initmax(&e);
-	i = 0;
 	if (ac != 2)
 		return (-1);
 	fd = open(av[1], O_RDONLY);
@@ -109,7 +107,10 @@ int			main(int ac, char **av)
 	while (get_next_line(fd, &line) == 1)
 		readline(line, &tab_p, &e);
 	if (e.nb / e.xmax != e.ymax)
-		printf("error\n");
+	{
+		ft_putstr("\nerror\n");
+		return (0);
+	}
 	close(fd);
 	ft_display(tab_p, &e);
 	return (1);

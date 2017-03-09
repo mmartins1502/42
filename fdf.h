@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 18:38:57 by mmartins          #+#    #+#             */
-/*   Updated: 2017/02/24 14:52:58 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/03/09 13:08:04 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ typedef struct	s_env
 	t_point	*tab_p;
 }				t_env;
 
+void			relief(t_point *tab_p, t_env *e);
+int				my_key(int keycode, t_env *e);
 unsigned int	ft_get_color(int cp1, int cp2, int i, int delta);
-int				ft_color(int coef);
 void			display_comments(t_env *e);
 t_point			*readline(char *line, t_point **tab_p, t_env *e);
 void			ft_display(t_point *tab_p, t_env *e);
 int				get_next_line(int const fd, char **line);
 int				main(int ac, char **av);
+void			before_draw(t_point *tab_p, t_env *e);
 
 #endif
