@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 11:55:52 by mmartins          #+#    #+#             */
-/*   Updated: 2017/03/09 13:44:08 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/03/14 18:57:17 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ static int			ft_realloc(int fd, t_point **tab_p)
 	int		i;
 	char	*line;
 	int		j;
-	t_point	nulle;
 
 	j = 0;
-	ft_bzero(&nulle, sizeof(t_point));
 	while (get_next_line(fd, &line) == 1)
 	{
 		i = 0;
@@ -56,7 +54,6 @@ static int			ft_realloc(int fd, t_point **tab_p)
 	}
 	if (!(*tab_p = (t_point*)malloc(sizeof(t_point) * (j + 1))))
 		return (0);
-	(*tab_p)[j + 1] = nulle;
 	close(fd);
 	return (j);
 }
@@ -70,10 +67,11 @@ t_point				*readline(char *line, t_point **tab_p, t_env *e)
 
 	i = 0;
 	linesplit = ft_strsplit(line, ' ');
-	while (linesplit[i])
+	while (linesplit[i] != NULL)
 	{
 		(*tab_p)[p].xx = i;
 		(*tab_p)[p].yy = y;
+		error_bis(*linesplit[i]);
 		if (((*tab_p)[p].zz = ft_atoi(linesplit[i])) <= e->zmin)
 			e->zmin = (*tab_p)[p].zz;
 		if (((*tab_p)[p].zz = ft_atoi(linesplit[i])) >= e->zmax)
@@ -99,16 +97,15 @@ int					main(int ac, char **av)
 
 	j = 0;
 	initmax(&e);
-	if (ac != 2)
-		return (-1);
+	error(ac);
 	fd = open(av[1], O_RDONLY);
 	j = ft_realloc(fd, &tab_p);
 	fd = open(av[1], O_RDONLY);
 	while (get_next_line(fd, &line) == 1)
 		readline(line, &tab_p, &e);
-	if (e.nb / e.xmax != e.ymax)
+	if (e.xmax == 0 || e.nb / e.xmax != e.ymax || fd < 0)
 	{
-		ft_putstr("\nerror\n");
+		ft_putstr("error main\n");
 		return (0);
 	}
 	close(fd);

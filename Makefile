@@ -6,13 +6,13 @@
 #    By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/25 18:53:08 by mmartins          #+#    #+#              #
-#    Updated: 2017/03/09 12:21:38 by mmartins         ###   ########.fr        #
+#    Updated: 2017/03/14 18:35:04 by mmartins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		fdf
 CC =		gcc
-CFLAGS =	-Wall -Wextra -Werror -I. -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -fsanitize=address -I.
 
 SRCS =		main.c \
 			get_next_line.c \
@@ -21,6 +21,7 @@ SRCS =		main.c \
 			keyhook.c \
 			new_points.c \
 			color.c \
+			error.c \
 
 OBJS =		$(SRCS:.c=.o)
 
@@ -30,7 +31,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJS)
 	make -C $(LIBFT_PATH)
-	$(CC) $(CFLAG) $(SRCS) -I./mlx/mlx.h ./mlx/libmlx.a -framework OpenGL -framework Appkit -L./libft -lft -o $(NAME) -g
+	$(CC) $(CFLAG) $(SRCS) -I./mlx/mlx.h -framework OpenGL -framework Appkit -L./libft -lft -lmlx -o $(NAME) -g
 
 clean:
 	rm -f $(OBJS)

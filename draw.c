@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 12:02:05 by mmartins          #+#    #+#             */
-/*   Updated: 2017/03/09 13:34:32 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/03/14 18:52:29 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void			draw_droite_x(t_line *line, t_env *e)
 	cumul = line->dx / 2;
 	i = 1;
 	e->is_decr = line->dx > 0 ? 1 : -1;
+	printf("line->dx = %d\n", line->dx);
 	while (i <= line->dx)
 	{
 		line->x += line->xinc;
@@ -29,6 +30,7 @@ static void			draw_droite_x(t_line *line, t_env *e)
 			cumul -= line->dx;
 			line->y += line->yinc;
 		}
+		// printf("draw droite X, line->x = %d, line->y = %d,  e->winx = %d,  e->winy = %d\n", line->x, line->y,  e->winx,  e->winy);
 		mlx_pixel_put(e->mlx, e->win, e->winx + line->x, e->winy + line->y,
 			ft_get_color(line->cp1, line->cp2, e->is_decr * i, line->dx));
 		i++;
@@ -43,6 +45,7 @@ static void			draw_droite_y(t_line *line, t_env *e)
 	j = 1;
 	cumul = line->dy / 2;
 	e->is_decr = line->dy > 0 ? 1 : -1;
+	printf("line->dy = %d\n", line->dy);
 	while (j <= line->dy)
 	{
 		line->y += line->yinc;
@@ -52,6 +55,7 @@ static void			draw_droite_y(t_line *line, t_env *e)
 			cumul -= line->dy;
 			line->x += line->xinc;
 		}
+		// printf("draw droite Y, line->x = %d, line->y = %d,  e->winx = %d,  e->winy = %d\n", line->x, line->y,  e->winx,  e->winy);
 		mlx_pixel_put(e->mlx, e->win, e->winx + line->x, e->winy + line->y,
 			ft_get_color(line->cp1, line->cp2, e->is_decr * j, line->dx));
 		j++;
@@ -61,7 +65,9 @@ static void			draw_droite_y(t_line *line, t_env *e)
 static void			join_point(t_env *e, t_point *p1, t_point *p2)
 {
 	t_line		line;
+	static int	nb = 0;
 
+	printf("join_point n %d\n", nb);
 	e->is_decr = 0;
 	line.x = p1->newx;
 	line.y = p1->newy;
@@ -76,13 +82,10 @@ static void			join_point(t_env *e, t_point *p1, t_point *p2)
 	line.cp2 = (float)255 / (float)(e->zmax - e->zmin) *
 	(float)(p2->zz - e->zmin);
 	if (line.dx >= line.dy)
-	{
 		draw_droite_x(&line, e);
-	}
 	else
-	{
 		draw_droite_y(&line, e);
-	}
+	nb++;
 }
 
 static void			before_draw_bis(t_point *tab_p, t_env *e, int i)
@@ -103,7 +106,8 @@ void				before_draw(t_point *tab_p, t_env *e)
 	i = 0;
 	display_comments(e);
 	relief(tab_p, e);
-	while (i <= e->nb)
+	printf("e->nb = %d\n", e->nb);
+	while (i < e->nb)
 	{
 		if (tab_p[i].yy == (e->ymax - 1) && tab_p[i].xx != (e->xmax - 1))
 			join_point(e, &tab_p[i], &tab_p[i + 1]);
@@ -117,8 +121,8 @@ void				before_draw(t_point *tab_p, t_env *e)
 			before_draw_bis(tab_p, e, i);
 		line.x = tab_p[i].newx;
 		line.y = tab_p[i].newy;
-		mlx_pixel_put(e->mlx, e->win, e->winx + line.x, e->winy + line.y,
-			0x00FFFFFF);
+		// mlx_pixel_put(e->mlx, e->win, e->winx + line.x, e->winy + line.y,
+		// 	0x00FFFFFF);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 14:13:19 by mmartins          #+#    #+#             */
-/*   Updated: 2017/01/26 11:27:35 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/03/13 15:45:21 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int			get_next_line(const int fd, char **line)
 			return (get_str(str, line));
 		buffer[ret] = '\0';
 		tmp = ft_strjoin(str, buffer);
-		free(str);
 		str = tmp;
 	}
 	return (get_str(str, line));

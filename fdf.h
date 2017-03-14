@@ -6,7 +6,7 @@
 /*   By: mmartins <mmartins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 18:38:57 by mmartins          #+#    #+#             */
-/*   Updated: 2017/03/09 13:08:04 by mmartins         ###   ########.fr       */
+/*   Updated: 2017/03/14 18:51:39 by mmartins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_env
 	void	*win;
 	int		xmax;
 	int		xmin;
-	int		ymax;
+	float	ymax;
 	int		ymin;
 	int		zmax;
 	int		zmin;
@@ -85,5 +85,8 @@ void			ft_display(t_point *tab_p, t_env *e);
 int				get_next_line(int const fd, char **line);
 int				main(int ac, char **av);
 void			before_draw(t_point *tab_p, t_env *e);
+int				error_bis(char c);
+int				error(int ac);
+int				error_ter(t_env *e);
 
 #endif
